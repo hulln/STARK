@@ -67,4 +67,4 @@ The **GUM corpus** was divided into **spoken** and **written** documents accordi
 | Total            | 211,920                  | 3,589            | 215,509          |
 
 - **Single Number Tokens**: Counted when a row starts with a digit followed by a space and does not contain a hyphen (e.g. "1", "2", "24").
-- **Range Tokens**: Cases like contractions or number ranges (e.g., "can't", "i'll", "1-2", "5-6").
+- **Range Tokens**: Cases like number ranges (e.g. "1-2", "5-6").
