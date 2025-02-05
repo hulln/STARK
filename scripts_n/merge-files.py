@@ -2,10 +2,10 @@ import os
 import glob
 
 # Specify the folder containing the CoNLL-U files
-folder_path = 'jan25/input/gdt'
+folder_path = 'sample/gum/multigenre'
 
 # Define the output file path for the merged file
-merged_file = os.path.join(folder_path, 'el_gdt-ud-merged.conllu')
+merged_file = os.path.join(folder_path, 'en_gum_multigenre-merged.conllu')
 
 # Get a list of all .conllu files in the folder
 conllu_files = glob.glob(os.path.join(folder_path, '*.conllu'))
