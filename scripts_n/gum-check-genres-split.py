@@ -6,7 +6,7 @@ current_genre = ""
 speaker_counts = defaultdict(int)
 genre_counts = defaultdict(int)
 
-spoken_genres = {"court", "interview", "conversation", "dialogue", "interview", "speech", "podcast", "vlog"}  # Adjust as needed
+spoken_genres = {"court", "interview", "conversation", "dialogue", "speech", "podcast", "vlog"}  # Adjust as needed
 
 input_path = 'sample/gum/en_gum-ud-merged.conllu'  # Update with your actual input filename
 spoken_output_path = 'sample/gum/output_spoken.conllu'
