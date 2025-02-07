@@ -4,11 +4,12 @@ Collocation metrics are statistical tools used to evaluate the strength of assoc
 
 ## Given Data
 
-- $c(w_1 \ldots w_n)$: Frequency of the n-gram (e.g., the frequency of `t. i.` together)
-- $c(w_1)$: Frequency of the first word (e.g., `t.`)
-- $c(w_n)$: Frequency of the $n$-th word (e.g., `i.`)
-- $N$: Total number of words in the corpus
-- $n$: Length of the n-gram (for a bigram, $n = 2$)
+| **Term**               | **Meaning**                                                                                                   | **Example**                                                                 |
+|------------------------|---------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------|
+| **$c(w_1 \ldots w_n)$** | Frequency of the entire n-gram (observed co-occurrence of the sequence).                                      | Frequency of `t. i.` together in the corpus.                               |
+| **$c(w_i)$**            | Frequency of the **$i$-th word** in the n-gram (where $i = 1, 2, \ldots, n$).                                 | - $c(w_1)$ = frequency of `t.` (first word).<br>- $c(w_2)$ = frequency of `i.` (second word). |
+| **$N$**                 | Total number of **tokens** (words) in the corpus.                                                             | If the corpus has 1,000,000 words, $N = 1,000,000$.                        |
+| **$n$**                 | Length of the n-gram (number of words in the sequence).                                                       | For a bigram (`t. i.`), $n = 2$.                                            |
 
 ## Expected Frequency
 
@@ -24,7 +25,7 @@ $$
 E(w_1w_2) = \frac{c_{w_1} \times c_{w_2}}{N}
 $$
 
-## Collocation Measures and Their Equations
+## Collocation Measures and Equations
 [Collocations in Corpus-Based Language Learning Research: Identifying, Comparing, and Interpreting the Evidence](https://onlinelibrary.wiley.com/doi/10.1111/lang.12225)
 
 
