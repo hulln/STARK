@@ -8,13 +8,16 @@ Keyness measures are statistical tools that compare the frequency of words in a 
 - **[Odds Ratio (OR)](http://crs2.kmutt.ac.th/Key-BNC/):** Compares the likelihood of occurrence between corpora.
 - **[%DIFF](https://core.ac.uk/download/pdf/227092349.pdf):** The percentage difference in normalized frequencies.
 
-## Values
-### Given Values
+## Data
+### Given Data
 
-- $ a = \text{RFC}_1 $   (absolute/raw frequency in Corpus 1)
-- $ b = \text{RFC}_2 $ (absolute/raw frequency in Corpus 2; `0.000000000000000001` if no occurrences)  
-- $ c = \text{C}_1 $ (total word count in Corpus 1)  
-- $ d = \text{C}_2 $ (total word count in Corpus 2)  
+| **Term**              | **Meaning**                                                                                     | **Example**                                                                 |
+|-----------------------|-------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------|
+| **$a = \text{RFC}_1$** | Absolute (raw) frequency of the n-gram in **Corpus 1**.                                         | If `t. i.` appears 50 times in Corpus 1, then $a = 50$.                     |
+| **$b = \text{RFC}_2$** | Absolute (raw) frequency of the n-gram in **Corpus 2** (set to `0.000000000000000001` if none). | If `t. i.` appears 30 times in Corpus 2, then $b = 30$. If absent, $b = 0.000000000000000001$. |
+| **$c = \text{C}_1$**   | Total number of **tokens** (words) in **Corpus 1**.                                             | If Corpus 1 has 1,000,000 words, then $c = 1,000,000$.                       |
+| **$d = \text{C}_2$**   | Total number of **tokens** (words) in **Corpus 2**.                                             | If Corpus 2 has 800,000 words, then $d = 800,000$.                           |
+
 
 ### Normalized Frequencies
 Normalized frequencies ($ \text{NFC}_1 $ and $ \text{NFC}_2 $) are calculated by dividing the frequency by the total corpus size:
