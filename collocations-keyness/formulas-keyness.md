@@ -20,6 +20,8 @@ Keyness measures are statistical tools that compare the frequency of words in a 
 
 
 ### Normalized Frequencies
+Normalized frequencies \( \text{NFC}_1 \) and \( \text{NFC}_2 \) are calculated by...
+
 Normalized frequencies ($ \text{NFC}_1 $ and $ \text{NFC}_2 $) are calculated by dividing the frequency by the total corpus size:
 
 $$ \text{NFC}_1 = \frac{a}{c} = \frac{\text{RFC}_1}{\text{C}_1}, \quad \text{NFC}_2 = \frac{b}{d} = \frac{\text{RFC}_2}{\text{C}_2} $$
