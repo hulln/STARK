@@ -1,0 +1,3 @@
+Tree	Absolute frequency	Relative frequency	Order	Grew-match query	Number of nodes	Head node	Example
+_ >obj _	1567	28280.1	AB	pattern {A []; B []; A -[obj]-> B; A << B}	2	_	ja A[hugsar] du nokre B[sånne] ? 
+_ <obj _	368	6641.4	AB	pattern {B []; A []; B -[obj]-> A; B >> A}	2	_	A[det] måtte vi B[lesse] utor sjølv ja . 
