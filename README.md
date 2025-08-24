@@ -102,7 +102,30 @@ The description of the trees given in the first column of the output is based on
 - Priority is marked using parentheses:
   -   A > B > C means that A governs both B and C in parallel, e.g. _read > newspapers > people_ for 'people read newspapers'
   -   A > (B > C) means that A governs B which, in turn, governs C, e.g. _read > (newspapers > interesting)_ for 'read interesting newspapers'
-  
+
+## Citation
+
+If you use STARK in your research, please cite:
+
+```
+@inproceedings{krsnik-dobrovoljc-2025-stark,
+    title = "{STARK}: A Toolkit for Dependency (Sub)Tree Extraction and Analysis",
+    author = "Krsnik, Luka  and
+      Dobrovoljc, Kaja",
+    editor = {Jablotschkin, Sarah  and
+      K{\"u}bler, Sandra  and
+      Zinsmeister, Heike},
+    booktitle = "Proceedings of the 23rd International Workshop on Treebanks and Linguistic Theories (TLT, SyntaxFest 2025)",
+    month = aug,
+    year = "2025",
+    address = "Ljubljana, Slovenia",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2025.tlt-1.5/",
+    pages = "44--51",
+    ISBN = "979-8-89176-291-6"
+}
+```
+
 ## Acknowledgment
 This tool was developed by Luka Krsnik in collaboration with Kaja Dobrovoljc and Marko Robnik Šikonja. Financial and infrastructural support was provided by Slovenian Research and Innovation Agency, CLARIN.SI and CJVT UL as part of the research projects [SPOT: A Treebank-Driven Approach to the Study of Spoken Slovenian](https://spot.ff.uni-lj.si/) (Z6-4617) and _Language Resources and Technologies for Slovene_ (P6-0411), as well as through the 2019 and 2024 _CLARIN.SI Resource and Service Development_ grants.
 
