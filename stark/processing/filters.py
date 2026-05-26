@@ -78,6 +78,7 @@ def read_filters(configs):
         'annodoc': configs['annodoc_example_dir'],
         'complete_tree_type': configs['complete_tree_type'],
         'association_measures': configs['association_measures'],
+        'complexity_measures': configs['complexity_measures'],
         'nodes_number': configs['nodes_number'],
         'frequency_threshold': configs['frequency_threshold'],
         'lines_threshold': configs['lines_threshold'],

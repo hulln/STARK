@@ -129,6 +129,8 @@ class Writer(object):
             header += ['Annodoc']
         if self.filters['association_measures']:
             header += ['MI', 'MI3', 'Dice', 'logDice', 't-score', 'simple-LL']
+        if self.configs['complexity_measures']:
+            header += ['MDD', 'NDD', 'Max depth', 'N tokens', 'N clauses', 'N T-units', 'Clauses/T-unit']
         if self.configs['compare']:
             header += ['Absolute frequency in second treebank', 'Relative frequency in second treebank', 'Ratio', 'LL',
                        'BIC', 'Log ratio', 'OR', '%DIFF']
@@ -190,6 +192,8 @@ class Writer(object):
                 row += [annodoc_json]
             if self.filters['association_measures']:
                 row += self.get_collocabilities(v, self.summary.unigrams, self.summary.corpus_size)
+            if self.configs['complexity_measures']:
+                row += self.get_complexity_measures(v)
             if self.configs['compare']:
                 other_abs_freq = other_representation_trees[k]['number'] if k in other_representation_trees else 0
                 row += self.get_keyness(v['number'], other_abs_freq, self.summary.corpus_size, other_corpus_size)
@@ -395,6 +399,29 @@ class Writer(object):
         tscore = (O - E) / math.sqrt(O)
         simplell = 2 * (O * math.log10(O / E) - (O - E))
         return ['%.2f' % mi, '%.2f' % mi3, '%.2f' % dice, '%.2f' % logdice, '%.2f' % tscore, '%.2f' % simplell]
+
+
+    @staticmethod
+    def get_complexity_measures(v):
+        """
+        Formats per-pattern complexity metrics for output.
+        Metrics were accumulated as running sums during counting and are averaged here.
+        :param v: representation_trees entry dict (must contain 'complexity_sum' and 'number')
+        :return: list of 7 formatted strings
+        """
+        if 'complexity_sum' not in v:
+            return ['n/a'] * 7
+        count = v['number']
+        s = v['complexity_sum']
+        mdd = s['mdd'] / count
+        ndd = s['ndd'] / count
+        max_depth = round(s['max_depth'] / count)   # fixed per topology; rounding removes float noise
+        n_tok = round(s['n_nodes'] / count)          # fixed per pattern
+        n_cls = s['n_clauses'] / count
+        n_tus = s['n_t_units'] / count
+        cpt = ('%.2f' % (n_cls / n_tus)) if n_tus > 0 else 'n/a'
+        return ['%.2f' % mdd, '%.2f' % ndd, str(max_depth), str(n_tok),
+                '%.2f' % n_cls, '%.2f' % n_tus, cpt]
 
 
 class TSVWriter(Writer):
