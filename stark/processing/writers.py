@@ -130,7 +130,7 @@ class Writer(object):
         if self.filters['association_measures']:
             header += ['MI', 'MI3', 'Dice', 'logDice', 't-score', 'simple-LL']
         if self.configs['complexity_measures']:
-            header += ['MDD', 'NDD', 'Max depth', 'N tokens', 'N clauses', 'N T-units', 'Clauses/T-unit']
+            header += ['MDD', 'NDD', 'Max depth', 'N clauses', 'N T-units', 'Clauses/T-unit']
         if self.configs['compare']:
             header += ['Absolute frequency in second treebank', 'Relative frequency in second treebank', 'Ratio', 'LL',
                        'BIC', 'Log ratio', 'OR', '%DIFF']
@@ -407,20 +407,19 @@ class Writer(object):
         Formats per-pattern complexity metrics for output.
         Metrics were accumulated as running sums during counting and are averaged here.
         :param v: representation_trees entry dict (must contain 'complexity_sum' and 'number')
-        :return: list of 7 formatted strings
+        :return: list of 6 formatted strings
         """
         if 'complexity_sum' not in v:
-            return ['n/a'] * 7
+            return ['n/a'] * 6
         count = v['number']
         s = v['complexity_sum']
         mdd = s['mdd'] / count
         ndd = s['ndd'] / count
         max_depth = round(s['max_depth'] / count)   # fixed per topology; rounding removes float noise
-        n_tok = round(s['n_nodes'] / count)          # fixed per pattern
         n_cls = s['n_clauses'] / count
         n_tus = s['n_t_units'] / count
         cpt = ('%.2f' % (n_cls / n_tus)) if n_tus > 0 else 'n/a'
-        return ['%.2f' % mdd, '%.2f' % ndd, str(max_depth), str(n_tok),
+        return ['%.2f' % mdd, '%.2f' % ndd, str(max_depth),
                 '%.2f' % n_cls, '%.2f' % n_tus, cpt]
 
 

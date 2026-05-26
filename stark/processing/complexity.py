@@ -16,6 +16,7 @@ import math
 
 _CLAUSE_DEPRELS = frozenset({"csubj", "ccomp", "xcomp", "advcl", "acl", "conj", "parataxis"})
 _T_UNIT_DEPRELS = frozenset({"conj", "parataxis"})
+_EXCLUDED_DEPRELS = frozenset({"punct", "root"})
 
 
 def _has_cop_child(rtn):
@@ -35,11 +36,13 @@ def get_complexity_data(repr_tree):
     summary.representation_trees and averaged at write time by
     Writer.get_complexity_measures().
 
-    Metrics are adapted from calculate_metrics.py (SyntComplex) for subtrees:
-      - MDD  : mean |head_pos - dep_pos| over all arcs in the subtree
-      - NDD  : |log(MDD / sqrt(root_sentence_pos * (n-1)))| (Jiang & Liu 2015)
+    Metrics follow calculate_metrics.py (SyntComplex), adapted for subtrees:
+      - MDD  : mean |head_pos - dep_pos| over non-punct arcs in the subtree
+      - NDD  : |log(MDD / sqrt(root_pos * n_arcs))| (Jiang & Liu 2015)
+               where n_arcs = number of non-punct arcs = number of
+               non-punct, non-subtree-root nodes
       - max_depth : deepest level in the subtree (root = 1)
-      - n_nodes   : number of nodes in the subtree
+      - n_nodes   : total number of nodes in the subtree (incl. punct)
       - n_clauses : 1 + verbal clause-introducing dependents within the subtree
       - n_t_units : 1 + verbal conj/parataxis dependents within the subtree
 
@@ -49,7 +52,7 @@ def get_complexity_data(repr_tree):
     :param repr_tree: RepresentationTree instance for one matched occurrence
     :return: dict with keys mdd, ndd, max_depth, n_nodes, n_clauses, n_t_units
     """
-    arcs = []          # (parent_sentence_pos, child_sentence_pos)
+    arcs = []          # (parent_sentence_pos, child_sentence_pos) — punct excluded
     n_nodes = 0
     n_clauses = 1      # subtree root counts as the main predication
     n_t_units = 1
@@ -59,8 +62,9 @@ def get_complexity_data(repr_tree):
         n_nodes += 1
         local_max = depth
         for child in rtn.children:
-            arcs.append((rtn.node.location, child.node.location))
             deprel = child.node.node.deprel
+            if deprel not in _EXCLUDED_DEPRELS:
+                arcs.append((rtn.node.location, child.node.location))
             is_verbal = child.node.node.upos == "VERB" or _has_cop_child(child)
             if deprel in _CLAUSE_DEPRELS and is_verbal:
                 n_clauses += 1
@@ -71,14 +75,16 @@ def get_complexity_data(repr_tree):
 
     max_depth = _traverse(repr_tree, 1)
 
-    # MDD
+    # MDD — mean dependency distance over non-punct arcs
     mdd_val = sum(abs(p - c) for p, c in arcs) / len(arcs) if arcs else 0.0
 
-    # NDD (undefined for single-node subtrees or zero MDD)
+    # NDD (Jiang & Liu 2015) — undefined for single-node or punct-only subtrees
+    # n_arcs == number of non-punct nodes excluding the subtree root, which
+    # mirrors "sentence_length" in the reference (non-punct, non-root tokens)
     root_pos = repr_tree.node.location
-    content_n = n_nodes - 1
-    if mdd_val > 0 and root_pos > 0 and content_n > 0:
-        ndd_val = abs(math.log(mdd_val / math.sqrt(root_pos * content_n)))
+    n_arcs = len(arcs)
+    if mdd_val > 0 and root_pos > 0 and n_arcs > 0:
+        ndd_val = abs(math.log(mdd_val / math.sqrt(root_pos * n_arcs)))
     else:
         ndd_val = 0.0
 
