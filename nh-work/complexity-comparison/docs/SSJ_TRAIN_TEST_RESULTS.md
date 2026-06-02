@@ -109,25 +109,28 @@ classified `stark_na_reported_as_zero`.
 
 1. **STARK's calculations are correct.** Across the entire SSJ treebank
    (13,435 sentences), STARK agrees with both SyntComplex and an independent
-   reimplementation on all five complexity measures (plus token count) for every
-   sentence, with the single exception of how it prints an undefined MDD/NDD.
+   reimplementation on all six complexity measures — MDD, NDD, maximum tree
+   depth, number of clauses, number of T-units, and clauses per T-unit — plus
+   the word-count cross-check, for every sentence, with the single exception of
+   how it prints an undefined MDD/NDD.
 
 2. **The one fix to consider in STARK:** print `n/a` (or empty) for MDD and NDD
    when there are no non-punctuation, non-root arcs, instead of `0.00`. This is a
    reporting choice, not a calculation error.
 
-3. **Comparison-tooling caveat (not a STARK issue):** STARK writes the *details*
-   file as raw tab-separated text, and a tree can start with a literal `"`.
-   Parsing that file with a CSV reader mis-handles those lines. The dev-only
-   `compare_stark_syntcomplex.py` uses a CSV reader for the details file, which
-   is fine for dev (no such trees) but would mis-map the lone-`"` sentences on
-   train. `independent_referee.py` parses the details file with raw tab splitting
-   and therefore covers all sentences correctly. This was found and fixed during
-   this extension.
+3. **Comparison-tooling fix (not a STARK issue):** STARK writes the *details*
+   file as raw tab-separated text, and a tree can start with a literal `"`;
+   parsing it with a CSV reader mis-handles those lines, and the original helper
+   also assumed one tree maps to exactly one sentence (untrue on train/test,
+   where STARK aggregates identical trees). Both `compare_stark_syntcomplex.py`
+   and `independent_referee.py` now parse the details file with raw tab splitting
+   and expand every sentence through it, so all sentences are compared correctly
+   on every split. This was found and fixed during this extension.
 
 ## Verdict
 
 STARK matches the SyntComplex reference (and an independent third
-implementation) on all five complexity measures across SSJ train, dev, and test,
-for every sentence. The only deviation is the cosmetic `0.00`-vs-`n/a`
+implementation) on all six complexity measures (MDD, NDD, maximum tree depth,
+number of clauses, number of T-units, clauses per T-unit) across SSJ train, dev,
+and test, for every sentence. The only deviation is the cosmetic `0.00`-vs-`n/a`
 representation of undefined MDD/NDD in 98 degenerate sentences.

@@ -130,11 +130,13 @@ For quick scanning of dev/test, the TSV/CSV are usually easier than the workbook
 
 STARK reproduces the SyntComplex reference (and an independent referee) on every complexity measure for every sentence in dev, train, and test. The single exception is the representation of an *undefined* MDD/NDD: when a sentence has no non-punctuation, non-root dependency arcs (short fragments such as `(mu)`, or a lone `"`), MDD is mathematically undefined. SyntComplex and the referee print `n/a`; STARK prints `0.00`. This is a representation choice, not a calculation error.
 
+Measures checked per sentence: **MDD** (mean dependency distance), **NDD** (normalized dependency distance), **maximum tree depth**, **number of clauses**, **number of T-units**, and **clauses per T-unit** — plus **word count** (number of tokens) as a cross-check. In the table below, "all" means every one of these six complexity measures matched.
+
 | Split | Sentences | Measures matching | Edge-case sentences (STARK `0.00` vs `n/a`) |
 |---|---:|---|---:|
-| dev | 1250 | all 5 (+ token count) | 5 |
-| train | 10903 | all 5 (+ token count) | 90 |
-| test | 1282 | all 5 (+ token count) | 3 |
+| dev | 1250 | all (+ token count) | 5 |
+| train | 10903 | all (+ token count) | 90 |
+| test | 1282 | all (+ token count) | 3 |
 
 Strict byte-equality status (the machine verdict in each `comparison_summary_<split>.tsv`): `FAIL`, driven solely by those `0.00`-vs-`n/a` cells. If exact parity is required, STARK should print `n/a` for MDD/NDD when there are no non-punctuation, non-root arcs.
 
