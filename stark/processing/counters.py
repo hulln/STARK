@@ -17,6 +17,8 @@ from abc import abstractmethod
 from multiprocessing import Pool
 from tqdm import tqdm
 
+from stark.processing.complexity import get_complexity_data
+
 
 class Counter(object):
     """
@@ -162,8 +164,15 @@ class Counter(object):
                                                                        sentence_conll,
                                                                        sentence_size)]
             self.summary.representation_trees[key]['number'] += 1
+            if self.filters['complexity_measures']:
+                complexity = get_complexity_data(r)
+                for metric, val in complexity.items():
+                    self.summary.representation_trees[key]['complexity_sum'][metric] += val
         else:
             self.summary.representation_trees[key] = {'number': 1, 'key': key_raw, 'word_array': word_array}
+
+            if self.filters['complexity_measures']:
+                self.summary.representation_trees[key]['complexity_sum'] = get_complexity_data(r)
 
             if self.configs['grew_match']:
                 self.summary.representation_trees[key]['grew'] = r.get_grew()
@@ -182,7 +191,7 @@ class Counter(object):
                 self.summary.representation_trees[key]['order_letters'] = order_letters
                 if self.configs['depsearch']:
                     self.summary.representation_trees[key]['key_sorted'] = r.get_key_sorted(self.filters)[1:-1]
-            if self.filters['print_root']:
+            if self.filters['head_info']:
                 self.summary.representation_trees[key]['root_name'] = r.node.name
             if self.configs['greedy_counter'] and self.summary.max_tree_size < r.tree_size:
                 self.summary.max_tree_size = r.tree_size

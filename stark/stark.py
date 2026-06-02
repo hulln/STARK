@@ -20,6 +20,7 @@ from pathlib import Path
 import sys
 import logging
 
+from stark.data.representation.empty_namespace import EmptyNamespace
 # from pympler import asizeof
 
 from stark.data.summary import Summary
@@ -80,10 +81,12 @@ def parse_args(args):
     parser.add_argument("--annodoc_detailed_dir", default=None, type=str,
                         help="Path to a directory where annodoc detailed files are stored (js library for visualization).")
 
-    parser.add_argument("--max_lines", default=None, type=str, help="Maximum number of trees in the output.")
+    parser.add_argument("--max_lines", default=None, type=int, help="Maximum number of trees in the output.")
     parser.add_argument("--node_info", default=None, type=str, help="Information about nodes in separate columns.")
+    parser.add_argument("--head_info", default=None, type=str, help="Information about head in separate columns.")
     parser.add_argument("--frequency_threshold", default=None, type=int, help="Frequency threshold.")
     parser.add_argument("--association_measures", default=None, type=str, help="Association measures.")
+    parser.add_argument("--complexity_measures", default=None, type=str, help="Complexity measures.")
     parser.add_argument("--continuation_processing", default=None, type=str, help="Nodes number.")
     parser.add_argument("--compare", default=None, type=str, help="Corpus with which we want to compare statistics.")
     return parser.parse_args(args)
@@ -114,7 +117,7 @@ def count_subtrees(configs, filters):
     return summary
 
 
-def read_configs(config, args):
+def read_configs(config, args=EmptyNamespace()):
     """
     Merges concrete settings from config files with arguments. When arguments are given, they override settings from
     configuration file. Look into documentation for which parameters in config file are required.
@@ -153,8 +156,12 @@ def read_configs(config, args):
     configs['node_order'] = (config.getboolean('settings', 'fixed') if not args.fixed else args.fixed == 'yes')
     configs['association_measures'] = (config.getboolean('settings', 'association_measures')
                                        if not args.association_measures else args.association_measures == 'yes')
+    configs['complexity_measures'] = (config.getboolean('settings', 'complexity_measures', fallback=False)
+                                      if not args.complexity_measures else args.complexity_measures == 'yes')
     configs['node_info'] = (config.getboolean('settings', 'node_info')
                                        if not args.node_info else args.node_info == 'yes')
+    configs['head_info'] = (config.getboolean('settings', 'head_info')
+                            if not args.head_info else args.head_info == 'yes')
 
     # optional parameters
     if config.has_option('settings', 'allowed_labels') or args.allowed_labels:
@@ -231,7 +238,6 @@ def read_configs(config, args):
         if not args.depsearch else args.depsearch == 'yes'
 
     configs['nodes_number'] = True
-    configs['print_root'] = True
 
     if configs['compare'] is not None:
         configs['other_input_path'] = configs['compare']
@@ -249,10 +255,10 @@ def read_configs(config, args):
     return configs
 
 
-def read_settings(config_file, args):
+def read_settings(config_file, args=EmptyNamespace()):
     """
     Reads configuration file and merges it with arguments.
-    :param config_file: string pointing to config file.
+    :param config_file: path to config file.
     :param args: Namespace object
     :return:
     """

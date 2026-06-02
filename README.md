@@ -1,12 +1,16 @@
-# STARK: A Tool for Bottom-Up Treebank Analysis
-STARK is a highly customizable tool designed for extracting different types of syntactic structures (trees) from parsed corpora (treebanks). It quantifies these structures with respect to frequency and provides other useful corpus-linguistic statistics, such as the strength of association between the nodes of a tree or its significance (keyness) in comparison to another treebank. 
+# STARK: A Tool for Dependency (Sub)Tree Extraction and Comparison
+
+**A bottom-up tool for discovering syntactic patterns in parsed corpora — no predefined queries needed.**
+
+
+![STARK_demonstration_loop](https://github.com/user-attachments/assets/6e6947bd-0db0-401f-bc69-59d9fc960e14)
+
+
+STARK is a highly customizable tool designed for extracting different types of syntactic structures (trees and subtrees) from parsed corpora (treebanks). It quantifies these structures with respect to frequency and provides other useful corpus-linguistic statistics, such as the strength of association between the nodes of a tree or its statistical significance in comparison to another treebank. 
 
 STARK is primarily aimed at processing treebanks based on the [Universal Dependencies](https://universaldependencies.org/) annotation scheme, but it also takes any other dependency treebank in the CONLL-U format as input. 
 
-
-[<img src="https://github.com/user-attachments/assets/cf2516f3-3b91-4099-98e2-dd648b43ee8b">](https://orodja.cjvt.si/stark/)
-
-For an online demonstration of the tool (with reduced set of features), please visit https://orodja.cjvt.si/stark/.
+For an online demonstration of the tool (with a slightly reduced set of features), please visit [https://orodja.cjvt.si/stark/](https://orodja.cjvt.si/stark/).
 
 
 ## Installation and execution
@@ -16,13 +20,12 @@ Install Python 3 on your system https://www.python.org/downloads/.
 Install pip and other libraries required by the program, by running the following commands in the terminal:
 ```bash
 sudo apt install python3-pip
-cd <PATH TO PROJECT DIRECTORY>
-pip3 install -r requirements.txt
+pip3 install stark-trees
 ```
 
 Execute extraction by first moving to the project directory and executing the script with:
 ```bash
-python3 stark.py 
+stark --config_file <PATH TO my-settings.ini FILE>
 ```
 
 ### Windows users
@@ -74,17 +77,19 @@ For a detailed explanation of these and many other settings, see the [settings d
 
 ## Output
 
+[<img src="https://github.com/user-attachments/assets/cf2516f3-3b91-4099-98e2-dd648b43ee8b" alt="Input-output flow">](https://orodja.cjvt.si/stark/)
+
 STARK produces a tab-separated (.tsv) file with a list of all the trees matching the input criteria sorted by descending frequency, as illustrated by the first few lines of the default [sample output](/sample/output.tsv) below, which show the 5-most frequent trees occurring in the sample `en_ewt-ud-dev.conllu` treebank.
 
-The description of the tree is given in the first column, while subsequent columns include additional information on individual nodes, the absolute and relative frequencies, the surface node order, the number of the nodes in the tree and the head. For adding other types of information to the output, such as other useful statistics and links to visualized examples, see the list of settings above or the [detailed settings documentation here](settings.md).
+The description of the tree is given in the first column, while subsequent columns additional information on the absolute and relative frequencies, the surface node order, the number of the nodes in the tree and the head node. For adding other types of information to the output, such as other useful statistics, examples and links to visualized trees, see the list of settings above or the [detailed settings documentation here](settings.md).
 
-|Tree | Node A | Node B | Node C | A-Freq | R-Freq | Order | N | Head |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| DET <det NOUN | DET | NOUN |   | 320 | 12644.6 | AB | 2 | NOUN
-| ADP <case DET <det NOUN | ADP | DET | NOUN |  183 | 7276.6 | ABC | 3 | NOUN
-| ADP <case PROPN | ADP | PROPN |   | 175 | 6958.5 | AB | 2 | PROPN
-| ADP <case NOUN | ADP | NOUN |   | 163 | 6481.4 | AB | 2 | NOUN
-| ADJ <amod NOUN | ADJ | NOUN |   | 117 | 4652.3 | AB | 2 | NOUN
+|Tree | Abs-Freq | Rel-Freq | Order | N | Head
+| --- | --- | --- | --- | --- | --- | 
+| DET <det NOUN | 320 | 12644.6 | AB | 2 | NOUN
+| ADP <case DET <det NOUN | 183 | 7276.6 | ABC | 3 | NOUN
+| ADP <case PROPN | 175 | 6958.5 | AB | 2 | PROPN
+| ADP <case NOUN | 163 | 6481.4 | AB | 2 | NOUN
+| ADJ <amod NOUN | 117 | 4652.3 | AB | 2 | NOUN
 
 ### Description of tree structure
 The description of the trees given in the first column of the output is based on the [dep_search](https://fginter.github.io/dep_search/) query language (archived [here](https://orodja.cjvt.si/drevesnik/help/en/)), which is simple to learn and easy to read:
@@ -97,7 +102,30 @@ The description of the trees given in the first column of the output is based on
 - Priority is marked using parentheses:
   -   A > B > C means that A governs both B and C in parallel, e.g. _read > newspapers > people_ for 'people read newspapers'
   -   A > (B > C) means that A governs B which, in turn, governs C, e.g. _read > (newspapers > interesting)_ for 'read interesting newspapers'
-  
+
+## Citation
+
+If you use STARK in your research, please cite:
+
+```
+@inproceedings{krsnik-dobrovoljc-2025-stark,
+    title = "{STARK}: A Toolkit for Dependency (Sub)Tree Extraction and Analysis",
+    author = "Krsnik, Luka  and
+      Dobrovoljc, Kaja",
+    editor = {Jablotschkin, Sarah  and
+      K{\"u}bler, Sandra  and
+      Zinsmeister, Heike},
+    booktitle = "Proceedings of the 23rd International Workshop on Treebanks and Linguistic Theories (TLT, SyntaxFest 2025)",
+    month = aug,
+    year = "2025",
+    address = "Ljubljana, Slovenia",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2025.tlt-1.5/",
+    pages = "44--51",
+    ISBN = "979-8-89176-291-6"
+}
+```
+
 ## Acknowledgment
 This tool was developed by Luka Krsnik in collaboration with Kaja Dobrovoljc and Marko Robnik Šikonja. Financial and infrastructural support was provided by Slovenian Research and Innovation Agency, CLARIN.SI and CJVT UL as part of the research projects [SPOT: A Treebank-Driven Approach to the Study of Spoken Slovenian](https://spot.ff.uni-lj.si/) (Z6-4617) and _Language Resources and Technologies for Slovene_ (P6-0411), as well as through the 2019 and 2024 _CLARIN.SI Resource and Service Development_ grants.
 
