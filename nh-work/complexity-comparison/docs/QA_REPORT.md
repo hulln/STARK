@@ -4,6 +4,8 @@ QA rerun time: `2026-06-02T12:08:31+02:00`
 
 This report double-checks that the STARK/SyntComplex comparison was run precisely, on the same data, and reproducibly.
 
+> Historical note: this report describes the original **dev** rerun. File paths below use the original unsuffixed names; the workspace was later unified so dev outputs carry a `_dev` suffix (e.g. `comparison_summary_dev.tsv`), and the comparison was extended to train/test — see [`SSJ_TRAIN_TEST_RESULTS.md`](SSJ_TRAIN_TEST_RESULTS.md) and the top-level `README.md`. The hashes recorded here remain valid for the corresponding renamed dev files.
+
 ## Source Links
 
 - STARK checkout: [`b4c59799ab5fa4daa49d7a3a248bc2d75dec84e2`](https://github.com/hulln/STARK/commit/b4c59799ab5fa4daa49d7a3a248bc2d75dec84e2), version `3.2.0`

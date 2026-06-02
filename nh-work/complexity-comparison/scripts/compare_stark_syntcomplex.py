@@ -96,56 +96,50 @@ def parse_args():
 
 
 def read_stark_details(path):
-    details = {}
-    duplicates = {}
-    with path.open(newline="", encoding="utf-8") as rf:
-        reader = csv.reader(rf, delimiter="\t")
-        for row in reader:
+    """Map each STARK tree key to the sentence ids that produced it.
+
+    STARK aggregates identical trees, so one tree key can correspond to several
+    sentences (legitimate, common on train/test). The details file is written as
+    RAW tab-separated text and a tree string can start with a literal '"' (e.g. a
+    one-token sentence that is just a quote), which csv.reader would mis-parse, so
+    we split on tabs manually.
+    """
+    key_to_sids = {}
+    with path.open(encoding="utf-8") as rf:
+        for line in rf:
+            row = line.rstrip("\n").split("\t")
             if len(row) < 2:
                 continue
-            key = row[0]
-            sent_id = row[1]
-            example = row[2] if len(row) > 2 else ""
-            if key in details:
-                duplicates.setdefault(key, [details[key]]).append(
-                    {"sent_id": sent_id, "detail_example": example}
-                )
-            else:
-                details[key] = {"sent_id": sent_id, "detail_example": example}
-    return details, duplicates
+            key, sent_id = row[0], row[1]
+            key_to_sids.setdefault(key, []).append(sent_id)
+    duplicates = {k: v for k, v in key_to_sids.items() if len(v) > 1}
+    return key_to_sids, duplicates
 
 
-def detail_key_candidates(stark_row):
-    tree = stark_row["Tree"]
-    order = stark_row.get("Order", "")
-    candidates = [tree + order]
-    if tree:
-        candidates.append(f"({tree}){order}")
-    return candidates
+def read_stark_rows(path, key_to_sids):
+    """Return sent_id -> STARK main row, covering every sentence.
 
-
-def read_stark_rows(path, details):
-    rows_by_sent_id = {}
-    unmatched = []
+    Each main row is keyed by both forms STARK may have written to the details
+    file (`tree+order` and `(tree)order`); every sentence that shares an
+    aggregated tree is mapped to that tree's row.
+    """
+    main_by_key = {}
     with path.open(newline="", encoding="utf-8") as rf:
         reader = csv.DictReader(rf, delimiter="\t")
         for row in reader:
-            matched_detail = None
-            matched_key = None
-            for candidate in detail_key_candidates(row):
-                if candidate in details:
-                    matched_detail = details[candidate]
-                    matched_key = candidate
-                    break
-            if matched_detail is None:
-                unmatched.append(row)
-                continue
-            sent_id = matched_detail["sent_id"]
-            row["_detail_key"] = matched_key
-            row["_sent_id"] = sent_id
-            if sent_id in rows_by_sent_id:
-                raise ValueError(f"Duplicate STARK sentence id: {sent_id}")
-            rows_by_sent_id[sent_id] = row
+            tree = row["Tree"]
+            order = row.get("Order", "")
+            main_by_key[tree + order] = row
+            main_by_key[f"({tree}){order}"] = row
+    rows_by_sent_id = {}
+    unmatched = []
+    for key, sids in key_to_sids.items():
+        row = main_by_key.get(key)
+        if row is None:
+            unmatched.append(key)
+            continue
+        for sid in sids:
+            rows_by_sent_id[sid] = row
     return rows_by_sent_id, unmatched
 
 
@@ -285,12 +279,14 @@ def write_summary(path, stats, stark_rows, syntcomplex_rows, unmatched_stark, de
     complexity_metrics = [metric["name"] for metric in METRICS if metric["complexity"]]
     complexity_mismatches = sum(stats[name]["mismatches"] for name in complexity_metrics)
     common_count = len(set(stark_rows) & set(syntcomplex_rows))
+    # Duplicate detail keys are legitimate: STARK aggregates identical trees, so
+    # several sentences can share one tree (common on train/test). They are
+    # reported for information but do not by themselves constitute a failure.
     verdict = (
         "PASS"
         if complexity_mismatches == 0
         and len(stark_rows) == len(syntcomplex_rows) == common_count
         and not unmatched_stark
-        and not detail_duplicates
         else "FAIL"
     )
     with path.open("w", newline="", encoding="utf-8") as wf:

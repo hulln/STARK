@@ -4,6 +4,8 @@ Date: 2026-06-02
 
 This workspace verifies the current STARK implementation of syntactic complexity measures against the reference SyntComplex script on the same input data.
 
+> This summary covers the **dev** split (the task as originally scoped). The comparison was later extended to **train** and **test** with the same conclusion; see [`SSJ_TRAIN_TEST_RESULTS.md`](SSJ_TRAIN_TEST_RESULTS.md). Saved outputs are now suffixed per split (`_dev`/`_train`/`_test`).
+
 ## Data and Versions
 
 - STARK checkout: [`b4c59799ab5fa4daa49d7a3a248bc2d75dec84e2`](https://github.com/hulln/STARK/commit/b4c59799ab5fa4daa49d7a3a248bc2d75dec84e2), version `3.2.0`
@@ -86,7 +88,7 @@ If exact output compatibility with SyntComplex is required, STARK should report 
 
 Manual Excel check:
 
-`nh-work/complexity-comparison/outputs/manual-check/stark_vs_syntcomplex_manual_check.xlsx`
+`nh-work/complexity-comparison/outputs/manual-check/stark_vs_syntcomplex_manual_check_dev.xlsx`
 
 Detailed QA report:
 

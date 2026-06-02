@@ -1,0 +1,7 @@
+sent_id	metric	stark_value	syntcomplex_value	syntcomplex_formatted	delta_stark_display_minus_syntcomplex_raw	mismatch_type	stark_tree	stark_example
+ssj579.2974.10558	MDD	0.00	n/a	n/a		na_vs_numeric	( <punct Emerson >punct )	A[(]B[Emerson]C[)] 
+ssj579.2974.10558	NDD	0.00	n/a	n/a		na_vs_numeric	( <punct Emerson >punct )	A[(]B[Emerson]C[)] 
+ssj598.3081.10915	MDD	0.00	n/a	n/a		na_vs_numeric	( <punct vd >punct )	A[(]B[vd]C[)] 
+ssj598.3081.10915	NDD	0.00	n/a	n/a		na_vs_numeric	( <punct vd >punct )	A[(]B[vd]C[)] 
+ssj606.3115.11051	MDD	0.00	n/a	n/a		na_vs_numeric	» <punct Vem >punct .	A[»]B[Vem]C[.] 
+ssj606.3115.11051	NDD	0.00	n/a	n/a		na_vs_numeric	» <punct Vem >punct .	A[»]B[Vem]C[.] 
