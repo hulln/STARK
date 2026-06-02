@@ -86,7 +86,7 @@ STARK matches SyntComplex for all normally measurable sentences and for all othe
 
 If exact output compatibility with SyntComplex is required, STARK should report `n/a` for MDD and NDD in this edge case instead of `0.00`.
 
-Manual Excel check:
+Manual Excel check (git-ignored — regenerate with `python3 scripts/make_manual_check_files.py --split dev`):
 
 `nh-work/complexity-comparison/outputs/manual-check/stark_vs_syntcomplex_manual_check_dev.xlsx`
 

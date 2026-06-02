@@ -53,6 +53,15 @@ python3 nh-work/complexity-comparison/scripts/independent_referee.py --split tra
   --mismatches   nh-work/complexity-comparison/outputs/comparison/referee_mismatches_train.tsv
 ```
 
+## Saved files (committed vs regenerate-on-demand)
+
+To keep the repo light, the small comparison/referee tables are committed
+(`outputs/comparison/`), while the bulky, fully-regenerable artifacts are
+git-ignored: the raw STARK `train`/`test` outputs and everything under
+`outputs/manual-check/`. Recreate them with the commands above (or, for the
+side-by-side/Excel, `make_manual_check_files.py --split <split>`). The MANIFEST
+lists every file with its hash, including the git-ignored ones.
+
 ## Row counts
 
 | Split | STARK main rows | STARK detail lines | SyntComplex rows | Sentences |
