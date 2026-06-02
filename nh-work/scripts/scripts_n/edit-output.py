@@ -2,7 +2,7 @@ import pandas as pd
 import os
 
 # Define the folder path where the file is located
-folder_path = 'sample/jan25/output_2'  # Replace with your folder path
+folder_path = 'nh-work/outputs-small/jan25/output_2'  # Replace with your folder path
 
 # Check if the folder exists and process the file
 if os.path.exists(folder_path):

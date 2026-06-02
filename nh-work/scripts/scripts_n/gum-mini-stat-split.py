@@ -6,8 +6,8 @@ written_genre_counts = defaultdict(int)
 spoken_speaker_counts = defaultdict(int)
 written_speaker_counts = defaultdict(int)
 
-spoken_output_path = 'sample/gum/output_spoken.conllu'
-written_output_path = 'sample/gum/output_written.conllu'
+spoken_output_path = 'nh-work/sample-data/gum/output_spoken.conllu'
+written_output_path = 'nh-work/sample-data/gum/output_written.conllu'
 
 def process_file(file_path, genre_counts, speaker_counts):
     if not os.path.exists(file_path):

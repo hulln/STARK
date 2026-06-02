@@ -5,6 +5,12 @@ tests/test_data/output/
 internal_saves/
 __pycache__/
 results/
+sample/output/
+sample/output_keyness/
+sample/output_svo/
+sample/output_svo_2/
+sample/output_vo/
+nh-work/outputs/
 data
 !stark/data
 config2.ini
@@ -17,3 +23,4 @@ stark.egg-info
 *.pypirc
 *.spec
 *.sage.py
+*.Zone.Identifier

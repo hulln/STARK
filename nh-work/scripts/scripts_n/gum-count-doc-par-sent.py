@@ -27,7 +27,7 @@ def count_docs_pars_sents(directory, output_file):
     
     print(f"Results saved to {output_file}")
 
-directory = "sample/gum/"  # Directory path
-output_file = "doc_par_sent_counts.tsv"  # Updated output file name
+directory = "nh-work/sample-data/gum/"  # Directory path
+output_file = "nh-work/sample-data/gum/output_data/doc_par_sent_counts.tsv"  # Updated output file name
 
 count_docs_pars_sents(directory, output_file)

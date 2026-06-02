@@ -2,7 +2,7 @@ import os
 import glob
 
 # Specify the folder containing the CoNLL-U files
-folder_path = 'sample/nynorsklia'
+folder_path = 'nh-work/sample-data/nynorsklia'
 
 # Define the output file path for the merged file
 merged_file = os.path.join(folder_path, 'no_nynorsklia-merged.conllu')

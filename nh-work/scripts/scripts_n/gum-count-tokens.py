@@ -40,7 +40,7 @@ def analyze_conllu_files(directory):
     return file_analyses
 
 # Directory containing CONLLU files
-directory = 'sample/gum'
+directory = 'nh-work/sample-data/gum'
 file_analyses = analyze_conllu_files(directory)
 
 # Print results

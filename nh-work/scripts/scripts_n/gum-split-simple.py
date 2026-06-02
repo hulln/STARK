@@ -6,9 +6,9 @@ genre_counts = defaultdict(int)
 
 spoken_genres = {"court", "interview", "conversation", "speech", "podcast", "vlog"}
 
-input_path = 'sample/gum/en_gum-ud-merged.conllu'
-spoken_output_path = 'sample/gum/output_spoken_2.conllu'
-written_output_path = 'sample/gum/output_written_2.conllu'
+input_path = 'nh-work/sample-data/gum/en_gum-ud-merged.conllu'
+spoken_output_path = 'nh-work/sample-data/gum/output_spoken_2.conllu'
+written_output_path = 'nh-work/sample-data/gum/output_written_2.conllu'
 
 with open(input_path, 'r') as infile, \
      open(spoken_output_path, 'w') as spoken_outfile, \

@@ -8,9 +8,9 @@ genre_counts = defaultdict(int)
 
 spoken_genres = {"court", "interview", "conversation", "dialogue", "speech", "podcast", "vlog"}  # Adjust as needed
 
-input_path = 'sample/gum/en_gum-ud-merged.conllu'  # Update with your actual input filename
-spoken_output_path = 'sample/gum/output_spoken.conllu'
-written_output_path = 'sample/gum/output_written.conllu'
+input_path = 'nh-work/sample-data/gum/en_gum-ud-merged.conllu'  # Update with your actual input filename
+spoken_output_path = 'nh-work/sample-data/gum/output_spoken.conllu'
+written_output_path = 'nh-work/sample-data/gum/output_written.conllu'
 
 both_conditions_count = 0  # Variable to count documents meeting both conditions
 genres_with_speaker_count_greater_than_0 = defaultdict(int)  # Track genres where speaker count > 0

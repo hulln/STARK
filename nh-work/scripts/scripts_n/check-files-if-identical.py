@@ -18,6 +18,6 @@ def compare_conllu_files(file1, file2):
             return False
 
 # Example usage
-file1 = 'sample/gum/output_written.conllu'
-file2 = 'sample/gum/output_written_2.conllu'
+file1 = 'nh-work/sample-data/gum/output_written.conllu'
+file2 = 'nh-work/sample-data/gum/output_written_2.conllu'
 compare_conllu_files(file1, file2)
