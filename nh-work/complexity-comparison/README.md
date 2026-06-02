@@ -111,7 +111,15 @@ The most useful sheet is `Manual side-by-side`. It has one row per sentence, in 
 - `MDD match?`
 - equivalent columns for NDD, max depth, clauses, T-units, clauses/T-unit, and token count
 
-Rows with `NO` in a match column are highlighted. The `Mismatches` sheet contains only the mismatching metric rows (all of them the `0.00`-vs-`n/a` edge case). The `train` workbook is large (~7 MB, 10,903 rows); for quick scanning the TSV/CSV are usually easier:
+Rows with `NO` in a match column are highlighted. The `Mismatches` sheet contains only the mismatching metric rows (all of them the `0.00`-vs-`n/a` edge case).
+
+The `dev` and `test` side-by-side files (TSV/CSV/Excel) are committed. The `train` side-by-side and Excel are large (~20 MB, 10,903 rows) and are **git-ignored — regenerate them on demand**:
+
+```bash
+python3 nh-work/complexity-comparison/scripts/make_manual_check_files.py --split train
+```
+
+For quick scanning of dev/test, the TSV/CSV are usually easier than the workbook:
 
 - `outputs/manual-check/manual_side_by_side_<split>.tsv`
 - `outputs/manual-check/manual_side_by_side_<split>.csv`
