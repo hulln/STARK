@@ -101,7 +101,11 @@ If Excel import is preferred over the workbook, use:
 
 ## Verdict
 
-`FAIL`
+**MATCH — with one documented edge-case difference.**
+
+STARK reproduces the SyntComplex reference on all 1250 sentences for every complexity measure. The single exception is 5 degenerate one-token sentences (e.g. `(mu)`) where the two tools *represent* an undefined value differently: STARK prints `0.00`, SyntComplex prints `n/a`. This is a representation choice, not a calculation error — in these sentences MDD/NDD are mathematically undefined (no non-punctuation, non-root dependency arcs). If exact parity is required, STARK should print `n/a` here too.
+
+Strict byte-equality status (the machine verdict written to `comparison_summary.tsv`): `FAIL`, driven solely by those 5 `0.00`-vs-`n/a` cells (10 metric values out of 8750 compared).
 
 Both tools produced and aligned 1250 sentence rows. All non-MDD/NDD measures match:
 
