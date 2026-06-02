@@ -1,0 +1,6 @@
+Tree	Absolute frequency	Relative frequency	Order	Grew-match query	Number of nodes	Head node	Example
+_ <nsubj _ >obj _	26	469.2	ABC	pattern {B []; A []; C []; B -[nsubj]-> A; B -[obj]-> C; B >> A; B << C}	3	_	dei brukte hestar ja # A[vognmennene] B[brukte] C[hestar] . 
+_ >nsubj _ >obj _	4	72.2	ABC	pattern {A []; B []; C []; A -[nsubj]-> B; A -[obj]-> C; A << B; A << C}	3	_	A[køyrde] B[bøndene] C[mjølka] dit med hest ? 
+_ <nsubj _ <obj _	1	18.0	ABC	pattern {C []; A []; B []; C -[nsubj]-> A; C -[obj]-> B; C >> A; C >> B}	3	_	men em # e kor stor A[last] må ein slik B[båt] C[rekne] med å få for at turen skal bli e ja kall det lønnsam ? 
+_ <obj _ <nsubj _	1	18.0	ABC	pattern {C []; A []; B []; C -[obj]-> A; C -[nsubj]-> B; C >> A; C >> B}	3	_	ja dei siste A[åra] da har B[storsildfisket] C[slått] til i e tett utfor her . 
+_ <obj _ >nsubj _	1	18.0	ABC	pattern {B []; A []; C []; B -[obj]-> A; B -[nsubj]-> C; B >> A; B << C}	3	_	e kor # lang A[tid] B[tek] ein slik e C[tur] utpå Egga ? 

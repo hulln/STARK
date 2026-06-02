@@ -1,0 +1,7 @@
+Tree	Absolute frequency	Relative frequency	Order	Grew-match query	Number of nodes	Head node	Example
+_ <nsubj _ >obj _	891	16080.1	ABC	pattern {B []; A []; C []; B -[nsubj]-> A; B -[obj]-> C; B >> A; B << C}	3	_	A[du] B[budde] jo C[her] på denne grensesona du . 
+_ >nsubj _ >obj _	260	4692.3	ABC	pattern {A []; B []; C []; A -[nsubj]-> B; A -[obj]-> C; A << B; A << C}	3	_	ja A[hugsar] B[du] nokre C[sånne] ? 
+_ <obj _ <nsubj _	185	3338.7	ABC	pattern {C []; A []; B []; C -[obj]-> A; C -[nsubj]-> B; C >> A; C >> B}	3	_	A[det] måtte B[vi] C[lesse] utor sjølv ja . 
+_ <obj _ >nsubj _	146	2634.9	ABC	pattern {B []; A []; C []; B -[obj]-> A; B -[nsubj]-> C; B >> A; B << C}	3	_	A[det] B[veit] C[eg] ikkje . 
+_ <nsubj _ <obj _	14	252.7	ABC	pattern {C []; A []; B []; C -[nsubj]-> A; C -[obj]-> B; C >> A; C >> B}	3	_	men A[kva] B[som] C[gjorde] kom du opp i noko e under krigen ? 
+_ >obj _ >nsubj _	2	36.1	ABC	pattern {A []; B []; C []; A -[obj]-> B; A -[nsubj]-> C; A << B; A << C}	3	_	å ja da # nei A[gjekk] ikkje ein B[månad] heller C[det] . 

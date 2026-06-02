@@ -1,0 +1,5 @@
+Tree	Absolute frequency	Relative frequency	Order	Grew-match query	Number of nodes	Head node	Example
+_ <nsubj _ >obj _	2201	27196.3	ABC	pattern {B []; A []; C []; B -[nsubj]-> A; B -[obj]-> C; B >> A; B << C}	3	_	Well A[I] finally B[found] some C[people] there I can dance with. 
+_ <obj _ <nsubj _	163	2014.1	ABC	pattern {C []; A []; B []; C -[obj]-> A; C -[nsubj]-> B; C >> A; C >> B}	3	_	Specifically, A[what] would B[you] have C[done] differently? 
+_ <nsubj _ <obj _	3	37.1	ABC	pattern {C []; A []; B []; C -[nsubj]-> A; C -[obj]-> B; C >> A; C >> B}	3	_	A[That] 's B[what] you C[implied]. 
+_ <obj _ >nsubj _	1	12.4	ABC	pattern {B []; A []; C []; B -[obj]-> A; B -[nsubj]-> C; B >> A; B << C}	3	_	What did, uh, what ’s his name – A[what] B[did], uh, our, our, wh-, the C[one] that always is dressed up like Undertaker on Facebook? 
