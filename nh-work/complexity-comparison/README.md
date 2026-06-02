@@ -12,7 +12,7 @@ All saved outputs are suffixed per split (`_dev`, `_train`, `_test`) so the thre
 - `data/`: local corpus location for the dev/train/test splits. The `.conllu` files are ignored by git; see `data/README.md` for sources, hashes, and download commands.
 - `docs/`: human-readable summaries — `TASK_SUMMARY.md` and `QA_REPORT.md` (dev), `SSJ_TRAIN_TEST_RESULTS.md` (train/test extension).
 - `external/`: pinned, unmodified SyntComplex reference script.
-- `outputs/`: saved STARK, SyntComplex, comparison, and manual-check outputs, suffixed per split.
+- `outputs/`: results, suffixed per split. The small reviewable files (comparison/referee tables, SyntComplex outputs, dev STARK output) are committed; the large regenerable ones (raw STARK train/test, all manual-check) are git-ignored — see Outputs.
 - `qa/`: a one-time dev reproducibility rerun (byte-for-byte identical to the saved dev outputs). The independent referee provides the equivalent cross-check for all splits.
 - `scripts/`: tool wrappers and comparison/manual-check helpers (see below).
 - `MANIFEST.tsv`: source, command, hash, and output traceability log.
@@ -83,15 +83,24 @@ python3 nh-work/complexity-comparison/scripts/make_manual_check_files.py --split
 
 ## Outputs
 
-Per split (`<split>` = `dev`, `train`, `test`):
+To keep the repo light, the small reviewable results are committed and the
+large, fully-regenerable artifacts are git-ignored. Everything is reproducible
+with the commands above; the MANIFEST lists every file (committed or not) with
+its hash, and the conclusion is written out in `docs/`.
 
-- `outputs/stark/stark_sl_ssj_<split>.tsv`, `…_<split>_details.tsv`
-- `outputs/syntcomplex/syntcomplex_sl_ssj_<split>.tsv`
+**Committed** (small — the results a reviewer reads), per split `<split>` = `dev`, `train`, `test`:
+
 - `outputs/comparison/comparison_summary_<split>.tsv`, `mismatches_<split>.tsv`, `mismatches_first20_<split>.md`
 - `outputs/comparison/referee_summary_<split>.tsv`, `referee_mismatches_<split>.tsv`
-- `outputs/manual-check/manual_side_by_side_<split>.tsv` / `.csv`, `manual_mismatches_only_<split>.tsv`, `stark_vs_syntcomplex_manual_check_<split>.xlsx`
+- `outputs/syntcomplex/syntcomplex_sl_ssj_<split>.tsv` (small)
+- `outputs/stark/stark_sl_ssj_dev.tsv`, `…_dev_details.tsv` (dev raw output kept as the canonical example)
 
-Scripts and docs:
+**Regenerate-on-demand** (git-ignored, large/redundant — recreate with the commands above):
+
+- `outputs/stark/stark_sl_ssj_{train,test}.tsv` and `…_details.tsv` (multi-MB raw STARK outputs)
+- everything under `outputs/manual-check/` (side-by-side TSV/CSV + Excel, every split)
+
+Scripts and docs (committed):
 
 - `scripts/run_syntcomplex_reference.py`, `scripts/compare_stark_syntcomplex.py`, `scripts/independent_referee.py`, `scripts/make_manual_check_files.py`
 - `docs/TASK_SUMMARY.md`, `docs/QA_REPORT.md`, `docs/SSJ_TRAIN_TEST_RESULTS.md`
@@ -99,30 +108,20 @@ Scripts and docs:
 
 ## Manual Excel Check
 
-For manual side-by-side checking, open the workbook for the split you want, e.g. for dev:
-
-`outputs/manual-check/stark_vs_syntcomplex_manual_check_dev.xlsx`
-
-The most useful sheet is `Manual side-by-side`. It has one row per sentence, in original corpus order, with STARK and SyntComplex values next to each other:
-
-- `STARK MDD`
-- `SyntComplex MDD raw`
-- `SyntComplex MDD rounded like STARK`
-- `MDD match?`
-- equivalent columns for NDD, max depth, clauses, T-units, clauses/T-unit, and token count
-
-Rows with `NO` in a match column are highlighted. The `Mismatches` sheet contains only the mismatching metric rows (all of them the `0.00`-vs-`n/a` edge case).
-
-The `dev` and `test` side-by-side files (TSV/CSV/Excel) are committed. The `train` side-by-side and Excel are large (~20 MB, 10,903 rows) and are **git-ignored — regenerate them on demand**:
+The manual side-by-side files (TSV/CSV and an Excel workbook) are **git-ignored — regenerate any split on demand**:
 
 ```bash
-python3 nh-work/complexity-comparison/scripts/make_manual_check_files.py --split train
+python3 nh-work/complexity-comparison/scripts/make_manual_check_files.py --split dev   # or train / test
 ```
 
-For quick scanning of dev/test, the TSV/CSV are usually easier than the workbook:
+This rebuilds, under `outputs/manual-check/`:
 
-- `outputs/manual-check/manual_side_by_side_<split>.tsv`
-- `outputs/manual-check/manual_side_by_side_<split>.csv`
+- `manual_side_by_side_<split>.tsv` / `.csv`
+- `stark_vs_syntcomplex_manual_check_<split>.xlsx`
+
+The workbook's most useful sheet is `Manual side-by-side`: one row per sentence, in original corpus order, with STARK and SyntComplex values next to each other (`STARK MDD`, `SyntComplex MDD raw`, `SyntComplex MDD rounded like STARK`, `MDD match?`, and the equivalent columns for NDD, max depth, clauses, T-units, clauses/T-unit, and token count). Rows with `NO` in a match column are highlighted.
+
+You usually don't need it: the committed `comparison_summary_<split>.tsv` and `mismatches_<split>.tsv` already capture the verdict and the exact mismatching cells, and the conclusion is written out in `docs/`.
 
 ## Verdict
 

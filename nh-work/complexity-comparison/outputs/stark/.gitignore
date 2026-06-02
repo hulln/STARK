@@ -1,0 +1,9 @@
+# Large raw STARK outputs for train/test are regenerated on demand:
+#   python3 stark.py --config_file configs/stark_complexity_sl_ssj_dev.ini \
+#     --input data/sl_ssj-ud-<split>.UD-Slovenian-SSJ-212197d.conllu \
+#     --output outputs/stark/stark_sl_ssj_<split>.tsv \
+#     --detailed_results_file outputs/stark/stark_sl_ssj_<split>_details.tsv
+stark_sl_ssj_train.tsv
+stark_sl_ssj_train_details.tsv
+stark_sl_ssj_test.tsv
+stark_sl_ssj_test_details.tsv

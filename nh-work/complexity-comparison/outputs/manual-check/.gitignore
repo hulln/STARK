@@ -1,5 +1,4 @@
-# Heavy train side-by-side / Excel (10,903 rows, ~20 MB) — regenerate on demand:
-#   python3 scripts/make_manual_check_files.py --split train
-manual_side_by_side_train.tsv
-manual_side_by_side_train.csv
-stark_vs_syntcomplex_manual_check_train.xlsx
+# All manual-check side-by-side / Excel files are regenerated on demand:
+#   python3 scripts/make_manual_check_files.py --split <dev|train|test>
+*
+!.gitignore
