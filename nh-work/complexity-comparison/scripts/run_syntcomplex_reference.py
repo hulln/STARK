@@ -28,6 +28,13 @@ def parse_args():
         help="Destination for SyntComplex ssj_results.tsv.",
     )
     parser.add_argument(
+        "--corpus",
+        type=Path,
+        default=None,
+        help="CoNLL-U file to place in SyntComplex's ssj-dev slot "
+        "(default: the pinned ssj dev file).",
+    )
+    parser.add_argument(
         "--keep-work-dir",
         action="store_true",
         help="Keep the generated work directory after running.",
@@ -43,7 +50,9 @@ def touch(path):
 def main():
     args = parse_args()
     source_dir = BASE_DIR / "external/SyntComplex"
-    corpus = BASE_DIR / "data/sl_ssj-ud-dev.UD-Slovenian-SSJ-212197d.conllu"
+    corpus = args.corpus or (
+        BASE_DIR / "data/sl_ssj-ud-dev.UD-Slovenian-SSJ-212197d.conllu"
+    )
 
     if not (source_dir / "scripts/calculate_metrics.py").exists():
         raise FileNotFoundError(source_dir / "scripts/calculate_metrics.py")
