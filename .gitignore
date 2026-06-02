@@ -16,6 +16,13 @@ data
 config2.ini
 configs/
 !tests/test_data/configs/
+!nh-work/complexity-comparison/configs/
+!nh-work/complexity-comparison/configs/**
+!nh-work/complexity-comparison/data/
+!nh-work/complexity-comparison/data/.gitignore
+!nh-work/complexity-comparison/data/README.md
+nh-work/complexity-comparison/data/*.conllu
+nh-work/complexity-comparison/tmp/
 gui/designer/
 build
 dist

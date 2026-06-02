@@ -1,0 +1,11 @@
+sent_id	metric	stark_value	syntcomplex_value	syntcomplex_formatted	delta_stark_display_minus_syntcomplex_raw	mismatch_type	stark_tree	stark_example
+ssj499.2651.9487	MDD	0.00	n/a	n/a		na_vs_numeric	( <punct mu >punct )	A[(]B[mu]C[)] 
+ssj499.2651.9487	NDD	0.00	n/a	n/a		na_vs_numeric	( <punct mu >punct )	A[(]B[mu]C[)] 
+ssj514.2725.9728	MDD	0.00	n/a	n/a		na_vs_numeric	( <punct fl >punct )	A[(]B[fl]C[)] 
+ssj514.2725.9728	NDD	0.00	n/a	n/a		na_vs_numeric	( <punct fl >punct )	A[(]B[fl]C[)] 
+ssj533.2814.10023	MDD	0.00	n/a	n/a		na_vs_numeric	( <punct jo >punct )	A[(]B[jo]C[)] 
+ssj533.2814.10023	NDD	0.00	n/a	n/a		na_vs_numeric	( <punct jo >punct )	A[(]B[jo]C[)] 
+ssj546.2865.10180	MDD	0.00	n/a	n/a		na_vs_numeric	( <punct sta >punct )	A[(]B[sta]C[)] 
+ssj546.2865.10180	NDD	0.00	n/a	n/a		na_vs_numeric	( <punct sta >punct )	A[(]B[sta]C[)] 
+ssj554.2895.10259	MDD	0.00	n/a	n/a		na_vs_numeric	( <punct pj >punct )	A[(]B[pj]C[)] 
+ssj554.2895.10259	NDD	0.00	n/a	n/a		na_vs_numeric	( <punct pj >punct )	A[(]B[pj]C[)] 

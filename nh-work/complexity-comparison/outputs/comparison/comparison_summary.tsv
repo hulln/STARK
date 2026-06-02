@@ -1,0 +1,42 @@
+section	metric	value
+verdict	status	FAIL
+rows	stark_sentences	1250
+rows	syntcomplex_sentences	1250
+rows	common_sentences	1250
+rows	unmatched_stark_rows	0
+rows	duplicate_detail_keys	0
+metric	MDD	total=1250
+metric	MDD	matches=1245
+metric	MDD	mismatches=5
+metric	MDD	na_mismatches=5
+metric	MDD	max_abs_delta_display_minus_raw=0.005
+metric	NDD	total=1250
+metric	NDD	matches=1245
+metric	NDD	mismatches=5
+metric	NDD	na_mismatches=5
+metric	NDD	max_abs_delta_display_minus_raw=0.00499818537713
+metric	Max depth	total=1250
+metric	Max depth	matches=1250
+metric	Max depth	mismatches=0
+metric	Max depth	na_mismatches=0
+metric	Max depth	max_abs_delta_display_minus_raw=0
+metric	N clauses	total=1250
+metric	N clauses	matches=1250
+metric	N clauses	mismatches=0
+metric	N clauses	na_mismatches=0
+metric	N clauses	max_abs_delta_display_minus_raw=0
+metric	N T-units	total=1250
+metric	N T-units	matches=1250
+metric	N T-units	mismatches=0
+metric	N T-units	na_mismatches=0
+metric	N T-units	max_abs_delta_display_minus_raw=0
+metric	Clauses/T-unit	total=1250
+metric	Clauses/T-unit	matches=1250
+metric	Clauses/T-unit	mismatches=0
+metric	Clauses/T-unit	na_mismatches=0
+metric	Clauses/T-unit	max_abs_delta_display_minus_raw=0.00333333333333
+metric	Number of nodes	total=1250
+metric	Number of nodes	matches=1250
+metric	Number of nodes	mismatches=0
+metric	Number of nodes	na_mismatches=0
+metric	Number of nodes	max_abs_delta_display_minus_raw=0

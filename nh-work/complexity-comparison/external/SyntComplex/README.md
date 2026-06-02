@@ -1,0 +1,9 @@
+# SyntComplex
+Repository for scripts to calculate syntactic complexity using various measures.
+
+This is a pinned copy of Luka Terčon's [`lukatercon/SyntComplex`](https://github.com/lukatercon/SyntComplex) reference script at commit [`bb0ba82ee5f9061ddd516de76b48c56fc7bfa682`](https://github.com/lukatercon/SyntComplex/commit/bb0ba82ee5f9061ddd516de76b48c56fc7bfa682). The script used here is [`scripts/calculate_metrics.py`](https://github.com/lukatercon/SyntComplex/blob/bb0ba82ee5f9061ddd516de76b48c56fc7bfa682/scripts/calculate_metrics.py).
+
+## SSJ-UD vs SST-UD
+The repository currently contains the script used to calculate the results described in the paper "Uporaba šestih mer skladenjske kompleksnosti za primerjavo jezika v govornem in pisnem korpusu" ([link](https://www.sdjt.si/wp/wp-content/uploads/2024/09/JT-DH_2024_Tercon.pdf) - unfortunately only in Slovenian, but I hear MT systems can do wonders these days).
+
+The _scripts_ directory contains the scripts used in that study, while _results_ contains the calculations of various complexity measures for the SSJ-UD and SST-UD treebanks.
