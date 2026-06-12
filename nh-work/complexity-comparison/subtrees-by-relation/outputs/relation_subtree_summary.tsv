@@ -1,0 +1,4 @@
+relation	n_chunks	n_shapes	n_multi_pos_groups	mdd_max_spread	depth_max_spread	ndd_max_spread
+advcl	179	173	3	0.0000	0.0000	1.0075
+acl	317	302	11	0.0000	0.0000	0.7408
+conj	1018	471	62	0.0000	0.0000	1.5890
